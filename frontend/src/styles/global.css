@@ -20,3 +20,88 @@ a:hover {
   display: flex;
   flex-direction: column;
 }
+
+/* Article / Post styles */
+.article-wrapper {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.article-body {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.article-body h1,
+.article-body h2,
+.article-body h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.article-body h1 { font-size: 1.8rem; }
+.article-body h2 { font-size: 1.4rem; }
+.article-body h3 { font-size: 1.15rem; }
+
+.article-body p {
+  margin-bottom: 1em;
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1em;
+}
+
+.article-body li {
+  margin-bottom: 0.3em;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid var(--color-border-strong);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.article-body th {
+  background: var(--color-bg-elevated);
+  font-weight: 600;
+}
+
+.article-body pre {
+  background: var(--color-bg-overlay);
+  color: var(--color-text);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+
+.article-body code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.article-body p code {
+  background: var(--color-bg-overlay);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+}
