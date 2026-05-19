@@ -1,7 +1,7 @@
 body {
   font-family: var(--font-family);
   color: var(--color-text);
-  background-color: var(--color-background);
+  background-color: var(--color-bg-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -104,4 +104,36 @@ a:hover {
   padding: 0.15em 0.4em;
   border-radius: var(--radius-sm);
   color: var(--color-primary);
+}
+
+/* ArticleRenderer error state */
+.article-renderer-error {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.article-renderer-error h3 {
+  color: var(--color-error);
+  margin: 0 0 0.5rem 0;
+}
+
+.article-renderer-error p {
+  color: var(--color-text-secondary);
+  margin: 0 0 1rem 0;
+}
+
+.article-renderer-error details {
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+}
+
+.article-renderer-error pre {
+  background: var(--color-bg-base);
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: 0.8rem;
 }

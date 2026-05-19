@@ -1,0 +1,52 @@
+.article-card-preview {
+  max-height: 600px; /* ~30 строк при line-height: 1.6 и font-size: 14px */
+  overflow: hidden;
+  position: relative;
+}
+
+.article-card-preview__content {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.article-card-preview__content h1,
+.article-card-preview__content h2,
+.article-card-preview__content h3,
+.article-card-preview__content h4,
+.article-card-preview__content h5,
+.article-card-preview__content h6 {
+  color: var(--color-text);
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.article-card-preview__content p {
+  margin-bottom: 0.5em;
+}
+
+.article-card-preview__content code {
+  font-size: 0.85em;
+  background: var(--color-bg-overlay);
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+}
+
+.article-card-preview__content pre {
+  background: var(--color-bg-overlay);
+  padding: 8px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* Градиент для плавного "обрезания" */
+.article-card-preview::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(transparent, var(--color-bg-surface));
+  pointer-events: none;
+}

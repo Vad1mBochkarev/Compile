@@ -1,49 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkGfm from 'remark-gfm';
-import remarkRehype from 'remark-rehype';
-import rehypeStringify from 'rehype-stringify';
+import React, { useState, useEffect, useMemo } from 'react';
+import { parseMarkdownToHtml } from '../../lib/markdown';
 
 interface ClientArticleRendererProps {
   rawMarkdown: string;
   className?: string;
 }
 
-export const ClientArticleRenderer: React.FC<ClientArticleRendererProps> = ({ 
-  rawMarkdown, 
-  className = 'article-body' 
+export const ClientArticleRenderer: React.FC<ClientArticleRendererProps> = ({
+  rawMarkdown,
+  className = 'article-body'
 }) => {
   const [htmlContent, setHtmlContent] = useState<string>('');
   const [isParsing, setIsParsing] = useState<boolean>(true);
+  const [parseError, setParseError] = useState<string | null>(null);
+
+  // Мемоизация для предотвращения повторного парсинга одинакового контента
+  const memoizedMarkdown = useMemo(() => rawMarkdown, [rawMarkdown]);
 
   useEffect(() => {
-    // Создаем асинхронную функцию внутри useEffect
     const parseMarkdown = async () => {
       setIsParsing(true);
+      setParseError(null);
       try {
-        const result = await unified()
-          .use(remarkParse)
-          .use(remarkGfm)
-          .use(remarkRehype)
-          .use(rehypeStringify)
-          .process(rawMarkdown);
-        
-        setHtmlContent(String(result));
+        const result = await parseMarkdownToHtml(memoizedMarkdown);
+        setHtmlContent(result);
       } catch (error) {
-        console.error('Ошибка парсинга Markdown:', error);
-        setHtmlContent('<p>Ошибка при загрузке содержимого.</p>');
+        const errorMessage = error instanceof Error ? error.message : 'Неизвестная ошибка';
+        setParseError(errorMessage);
+        setHtmlContent('');
       } finally {
         setIsParsing(false);
       }
     };
 
-    parseMarkdown();
-  }, [rawMarkdown]); // Перепарсиваем, если markdown изменился (удобно для live-preview)
+    if (memoizedMarkdown) {
+      parseMarkdown();
+    } else {
+      setIsParsing(false);
+    }
+  }, [memoizedMarkdown]);
 
   if (isParsing) {
-    // Здесь можно показать скелетон или лоадер
     return <div className={className}>Загрузка контента...</div>;
+  }
+
+  if (parseError) {
+    return (
+      <div className={className}>
+        <div className="article-renderer-error">
+          <h3>Ошибка загрузки контента</h3>
+          <p>Не удалось обработать Markdown. Попробуйте позже.</p>
+          <details>
+            <summary>Технические детали</summary>
+            <pre>{parseError}</pre>
+          </details>
+        </div>
+      </div>
+    );
   }
 
   return (

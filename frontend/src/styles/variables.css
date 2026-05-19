@@ -27,10 +27,6 @@
   --color-border: rgba(240, 246, 252, 0.12);
   --color-border-strong: rgba(240, 246, 252, 0.2);
 
-  /* Legacy aliases */
-  --color-background: var(--color-bg-base);
-  --color-surface: var(--color-bg-surface);
-
   /* Font */
   --font-display: 'Syne', sans-serif;
   --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -50,6 +46,9 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-full: 100px;
+
+  /* Layout */
+  --header-height: 60px;
 
   /* Shadow */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
