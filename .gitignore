@@ -60,7 +60,6 @@ frontend/tsconfig.tsbuildinfo
 
 # Заметки-README (файлы-подсказки для разработчика)
 **/__init__.py.md
-**/README.md
 diagrams.md
 requirements.md
 plans/
