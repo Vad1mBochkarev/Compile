@@ -52,7 +52,7 @@ function EditorPage() {
       status: 'draft',
     })
     setSelectedArticle(newArticle)
-  }, [addArticle, setSelectedArticle]
+  }, [addArticle, setSelectedArticle])
 
 
   const handleSave = useCallback(async (updates: Partial<Article>) => {
