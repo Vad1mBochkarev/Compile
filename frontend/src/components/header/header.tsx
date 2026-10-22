@@ -1,16 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useProfileStore } from '../../store/profileStore';
 import { useAuthStore } from '../../store/authStore';
 import './header.css'
 
 const Header: React.FC = () => {
-  const { getInitials } = useProfileStore();
-  const { isAuthenticated, user, logout } = useAuthStore();
+  const { isAuthenticated, logout } = useAuthStore();
   const navigate = useNavigate();
-
-  const displayName = user?.profile?.display_name || user?.email || '';
-  const initials = displayName ? displayName.slice(0, 2).toUpperCase() : getInitials();
 
   const handleLogout = () => {
     logout();

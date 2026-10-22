@@ -65,7 +65,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         clearTimeout(autosaveTimerRef.current);
       }
     };
-  }, [title, content, article?.id, article?.status, onSave]);
+  }, [title, content, article, onSave]);
 
   if (!article) {
     return (
