@@ -1,0 +1,33 @@
+name: Backend CI
+
+on:
+    push:
+        branches: ["main", "master"]
+    pull_request:
+        branches: ["main", "master"]
+jobs:
+    backend-test:
+        runs-on: ubuntu-22.04
+        timeout-minutes: 15
+
+        steps:
+        - name: Checkout repository code
+          uses: actions/checkout@v4
+
+        - name: Install Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: "3.11"
+        
+        - name: Install dependencies
+          run: pip install -r backend/requirements.txt
+        
+        - name: Run Backend server
+          run: |
+            cd backend
+            DATABASE_URL="sqlite:///./app.db" uvicorn app.main:app --host 127.0.0.1 --port 8000 &
+            sleep 3
+
+        - name: test backend server
+          run: |
+            curl --fail http://127.0.0.1:8000/api/health
