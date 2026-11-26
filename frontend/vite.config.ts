@@ -1,22 +1,26 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': '/src',
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, '.', '')
+
+  return {
+    plugins: [react()],
+    resolve: {
+      alias: {
+        '@': '/src',
+      },
+      extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
     },
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
-  },
-  server: {
-    port: 5173,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
+    server: {
+      host: true,
+      port: 5173,
+      proxy: {
+        '/api': {
+          target: env.VITE_API_TARGET || 'http://localhost:8000',
+          changeOrigin: true,
+        },
       },
     },
-  },
+  }
 })
